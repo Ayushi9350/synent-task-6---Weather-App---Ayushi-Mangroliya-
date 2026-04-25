@@ -1,0 +1,26 @@
+import requests
+
+# Function to get weather data
+def get_weather(city):
+    api_key = "79df70b104e061b9008eed9b6793d015"   # ahi tamaru API key mukvu
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    
+    response = requests.get(url)
+    data = response.json()
+    
+    print(data)
+    
+    if data["cod"] == 200:
+        temp = data["main"]["temp"]
+        humidity = data["main"]["humidity"]
+        
+        print("\nWeather Information:")
+        print("City:", city)
+        print("Temperature:", temp, "°C")
+        print("Humidity:", humidity, "%")
+    else:
+        print("City not found!")
+
+# User input
+city_name = input("Enter city name: ")
+get_weather(city_name)
